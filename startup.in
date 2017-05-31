@@ -7,17 +7,34 @@ set -e -u
 
 @@
 
-export LC_ALL=C.UTF-8
-export DEBIAN_FRONTEND=noninteractive
-cat > /etc/apt/apt.conf.d/99local <<EOF
-APT::Install-Recommends "false";
-Apt::Get::Purge "true";
-Apt::Get::Show-Versions "true";
-Acquire::Languages "none";
+if dpkg-vendor --derives-from Debian
+then
+    export LC_ALL=C.UTF-8
+    export DEBIAN_FRONTEND=noninteractive
+    cat > /etc/apt/apt.conf.d/99local <<EOF
+    APT::Install-Recommends "false";
+    Apt::Get::Purge "true";
+    Apt::Get::Show-Versions "true";
+    Acquire::Languages "none";
 EOF
-apt-get update
-apt-get dist-upgrade -y
-apt-get install -y locales-all mosh
-adduser --disabled-password --gecos "$gecos" "$user"
+    apt-get update
+    apt-get dist-upgrade -y
+    apt-get install -y locales-all mosh
+    adduser --disabled-password --gecos "$gecos" "$user"
+elif command -v yum
+then
+    yum install -y mosh
+    if command -v firewall-cmd
+    then
+        firewall-cmd --add-service=mosh --permanent
+        firewall-cmd --reload
+    else
+        iptables -I INPUT 1 -p udp --dport 60000:61000 -j ACCEPT
+        service iptables save
+    fi
+    adduser --password '*' --comment "$gecos" "$user"
+fi
 su "$user" -c 'mkdir -m 700 ~/.ssh'
 cat .ssh/authorized_keys | su "$user" -c 'cat > ~/.ssh/authorized_keys'
+
+# vim:ts=4 sts=4 sw=4 et
