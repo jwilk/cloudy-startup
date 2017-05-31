@@ -3,6 +3,8 @@
 # Copyright © 2017 Jakub Wilk <jwilk@jwilk.net>
 # SPDX-License-Identifier: MIT
 
+@@
+
 export LC_ALL=C.UTF-8
 export DEBIAN_FRONTEND=noninteractive
 cat > /etc/apt/apt.conf.d/99local <<EOF
@@ -14,6 +16,6 @@ EOF
 apt-get update
 apt-get dist-upgrade -y
 apt-get install -y locales-all mosh
-adduser --disabled-password --gecos 'Jakub Wilk' jwilk
-su jwilk -c 'mkdir -m 700 ~/.ssh'
-cat .ssh/authorized_keys | su jwilk -c 'cat > ~/.ssh/authorized_keys'
+adduser --disabled-password --gecos "$gecos" "$user"
+su "$user" -c 'mkdir -m 700 ~/.ssh'
+cat .ssh/authorized_keys | su "$user" -c 'cat > ~/.ssh/authorized_keys'
