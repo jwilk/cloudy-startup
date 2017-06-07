@@ -5,7 +5,8 @@
 
 set -e -u
 
-@@
+user=@user@
+gecos=@gecos@
 
 if ls /etc/debian_version
 then

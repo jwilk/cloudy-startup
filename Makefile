@@ -12,7 +12,7 @@ clean:
 	rm -f startup *.tmp
 
 startup: startup.in
-	sed -e "s/^@@$$/user='$(user)'; gecos='$(gecos)'/" < $(<) > $(@).tmp
+	sed -e "s/@user@/'$(user)'/; s/@gecos@/'$(gecos)'/" < $(<) > $(@).tmp
 	chmod +x $(@).tmp
 	mv $(@).tmp $(@)
 
