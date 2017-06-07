@@ -18,8 +18,7 @@ then
     Acquire::Languages "none";
 EOF
     apt-get update
-    apt-get dist-upgrade -y
-    apt-get install -y locales-all mosh
+    apt-get dist-upgrade -y locales-all mosh
     adduser --disabled-password --gecos "$gecos" "$user"
 elif command -v yum
 then
