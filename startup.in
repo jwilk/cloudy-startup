@@ -19,7 +19,9 @@ then
     Acquire::Languages "none";
 EOF
     apt-get update
-    apt-get dist-upgrade -y locales-all mosh
+    locales_all=locales-all
+    ls /etc/dpkg/origins/ubuntu && locales_all=
+    apt-get dist-upgrade -y mosh $locales_all
     adduser --disabled-password --gecos "$gecos" "$user"
 elif command -v yum
 then
