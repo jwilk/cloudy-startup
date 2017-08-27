@@ -8,7 +8,7 @@ set -e -u
 user=@user@
 gecos=@gecos@
 
-if ls /etc/debian_version
+if [ -f /etc/debian_version ]
 then
     export LC_ALL=C.UTF-8
     export DEBIAN_FRONTEND=noninteractive
