@@ -35,6 +35,10 @@ then
         service iptables save
     fi
     adduser --password '*' --comment "$gecos" "$user"
+elif command -v freebsd-version
+then
+    pkg install -y mosh bash
+    pw useradd -n "$user" -c "$gecos" -s /usr/local/bin/bash -m -w no
 else
     printf 'startup: error: this system is not supported\n' "$0"
     exit 1
