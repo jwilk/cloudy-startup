@@ -39,6 +39,11 @@ elif command -v freebsd-version
 then
     pkg install -y mosh bash
     pw useradd -n "$user" -c "$gecos" -s /usr/local/bin/bash -m -w no
+elif [ "$(uname -s)" -eq "OpenBSD" ]
+then
+    [ -f /etc/installurl ] || printf '%s\n' "http://ftp.openbsd.org/pub/OpenBSD/" > /etc/installurl
+    pkg_add -r mosh bash
+    adduser -shell bash -batch "$user" guest "$gecos" '*' < /dev/null
 else
     printf 'startup: error: this system is not supported\n' "$0"
     exit 1
