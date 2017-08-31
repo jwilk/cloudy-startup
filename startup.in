@@ -43,7 +43,7 @@ else
     printf 'startup: error: this system is not supported\n' "$0"
     exit 1
 fi
-su "$user" -c 'mkdir -m 700 ~/.ssh'
 su "$user" -c 'cat > ~/.ssh/authorized_keys' < .ssh/authorized_keys
+su "$user" -c 'mkdir -p -m 700 ~/.ssh'
 
 # vim:ts=4 sts=4 sw=4 et
