@@ -41,7 +41,7 @@ then
     pw useradd -n "$user" -c "$gecos" -s /usr/local/bin/bash -m -w no
 elif [ "$(uname -s)" -eq "OpenBSD" ]
 then
-    [ -f /etc/installurl ] || printf '%s\n' "http://ftp.openbsd.org/pub/OpenBSD/" > /etc/installurl
+    [ -f /etc/installurl ] || printf '%s\n' 'http://ftp.openbsd.org/pub/OpenBSD/' > /etc/installurl
     pkg_add -r mosh bash
     adduser -shell bash -batch "$user" guest "$gecos" '*' < /dev/null
 else
