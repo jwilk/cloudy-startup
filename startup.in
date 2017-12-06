@@ -23,6 +23,11 @@ EOF
     ls /etc/dpkg/origins/ubuntu && locales_all=
     apt-get dist-upgrade -y mosh $locales_all
     adduser --disabled-password --gecos "$gecos" "$user"
+elif [ -f /etc/alpine-release ]
+then
+    apk add mosh
+    adduser -D "$user"
+    passwd -u "$user"
 elif command -v yum
 then
     yum install -y mosh
