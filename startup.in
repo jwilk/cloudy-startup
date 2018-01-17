@@ -30,6 +30,10 @@ then
     passwd -u "$user"
 elif command -v yum
 then
+    if [ -f /etc/centos-release ]
+    then
+        yum install -y epel-release
+    fi
     yum install -y mosh
     if command -v firewall-cmd
     then
