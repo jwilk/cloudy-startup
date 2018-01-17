@@ -54,7 +54,7 @@ then
     pkg_add -r mosh bash
     adduser -shell bash -batch "$user" guest "$gecos" '*' < /dev/null
 else
-    printf 'startup: error: this system is not supported\n' "$0"
+    printf 'startup: error: this system is not supported\n' >&2
     exit 1
 fi
 cd /
