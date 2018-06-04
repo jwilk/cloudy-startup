@@ -3,7 +3,9 @@
 # Copyright © 2017-2018 Jakub Wilk <jwilk@jwilk.net>
 # SPDX-License-Identifier: MIT
 
+# shellcheck disable=SC2154
 [ -z "$tcsh" ] || sh -c 'echo "tcsh is not supported" >&2'
+# shellcheck disable=SC2154
 [ -z "$tcsh" ] || exit 1
 
 set -e -u
