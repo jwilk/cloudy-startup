@@ -14,6 +14,6 @@ clean:
 startup: startup.in
 	sed -e "s/@user@/'$(user)'/; s/@gecos@/'$(gecos)'/" < $(<) > $(@).tmp
 	chmod +x,a-w $(@).tmp
-	mv $(@).tmp $(@)
+	mv -f $(@).tmp $(@)
 
 # vim:ts=4 sts=4 sw=4 noet
