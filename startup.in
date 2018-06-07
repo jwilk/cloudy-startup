@@ -25,7 +25,11 @@ then
 EOF
     apt-get update
     locales_all=locales-all
-    [ -f /etc/dpkg/origins/ubuntu ] && locales_all=
+    if [ -f /etc/dpkg/origins/ubuntu ]
+    then
+        locale | grep -Eo '=[^"]+$' | sort -u | cut -c 2- | xargs locale-gen
+        locales_all=
+    fi
     apt-get dist-upgrade -y mosh $locales_all
     adduser --disabled-password --gecos "$gecos" "$user"
 elif [ -f /etc/alpine-release ]
