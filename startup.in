@@ -15,7 +15,6 @@ gecos=@gecos@
 
 if [ -f /etc/debian_version ]
 then
-    export LC_ALL=C.UTF-8
     export DEBIAN_FRONTEND=noninteractive
     cat > /etc/apt/apt.conf.d/99local <<EOF
     APT::Install-Recommends "false";
