@@ -26,7 +26,7 @@ EOF
     locales_all=locales-all
     if [ -f /etc/dpkg/origins/ubuntu ]
     then
-        locale | grep -Eo '=[^"]+$' | sort -u | cut -c 2- | xargs locale-gen
+        locale | grep -Eo '=[^"]+$' | sort -u | cut -c 2- | grep -vxF 'C.UTF-8' | xargs locale-gen
         locales_all=
     fi
     apt-get dist-upgrade -y mosh $locales_all
