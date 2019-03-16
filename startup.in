@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 # shellcheck disable=SC2154
-[ -z "$tcsh" ] || sh -c 'echo "tcsh is not supported" >&2'
+[ -z "$tcsh" ] || sh -c 'echo "cloudy-startup: tcsh is not supported" >&2'
 # shellcheck disable=SC2154
 [ -z "$tcsh" ] || exit 1
 
