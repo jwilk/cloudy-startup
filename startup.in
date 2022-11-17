@@ -29,6 +29,7 @@ EOF
         locale | grep -Eo '=[^"]+$' | sort -u | cut -c 2- | grep -vxF 'C.UTF-8' | xargs locale-gen
         locales_all=
     fi
+    # shellcheck disable=SC2086
     apt-get dist-upgrade -y mosh $locales_all
     adduser --disabled-password --gecos "$gecos" "$user"
 elif [ -f /etc/alpine-release ]
